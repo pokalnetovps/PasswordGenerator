@@ -1,0 +1,2 @@
+main-class: app.PassGnMain
+class-path: .\bin\app
