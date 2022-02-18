@@ -6,7 +6,7 @@ import java.awt.datatransfer.*;
 import java.awt.event.*;
 
 public class Form extends JFrame {
-    PassGen pass = new PassGen(8);
+    PasswordGenerator pass = new PasswordGenerator(8);
     public JTextArea area0 = new JTextArea(pass.getNewPass());
 
     public Form() {

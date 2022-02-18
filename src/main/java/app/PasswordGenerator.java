@@ -4,10 +4,10 @@ package app;
  * Класс генератора пароля
  *
  * @author Покальнетов Павел
- * @version 1.0
+ * @version 1.1
  */
 
-public class PassGen {
+public class PasswordGenerator {
     /**
      * строка сгенерированного пароля
      */
@@ -19,18 +19,18 @@ public class PassGen {
     /**
      * набор символов для генерации пароля
      */
-    private String passChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789";
-    //private String passChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789" + "!@#$%^&*()_+-=/?,.`~<>;:\"'{}[]|";
+    //private String passChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789";
+    private String passChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789" + "!@#$%^&*()_+-=/?,.`~<>;:\"'{}[]|";
     private int passCharLen;
 
     /**
      * Конструктор - создание генератора с базовым набором символов и длинной 8 знаков
      *
-     * @see PassGen#PassGen(String)
-     * @see PassGen#PassGen(String, int)
-     * @see PassGen#PassGen(int)
+     * @see PasswordGenerator#PasswordGenerator(String)
+     * @see PasswordGenerator#PasswordGenerator(String, int)
+     * @see PasswordGenerator#PasswordGenerator(int)
      */
-    public PassGen() {
+    public PasswordGenerator() {
         this.passLen = 8;
         this.passCharLen = this.passChar.length();
         this.passGenerate();
@@ -41,7 +41,7 @@ public class PassGen {
      *
      * @param str - строка - набор символов для генерации рароля
      */
-    public PassGen(String str) {
+    public PasswordGenerator(String str) {
 
         this.setPassChar(str);
         if (this.passLen == 0) {
@@ -56,7 +56,7 @@ public class PassGen {
      *
      * @param len - длина пароля
      */
-    public PassGen(int len) {
+    public PasswordGenerator(int len) {
         /**
          * @param
          */
@@ -66,13 +66,12 @@ public class PassGen {
     }
 
     /**
-     * Конструктор - создание генератора с заданным базовым набором символов
-     * и заданной длиной пароля по умолчанию =8
+     * Конструктор - создание генератора с заданным базовым набором символов и заданной длиной пароля
      *
      * @param str - набор символов для генератора
      * @param len - длина пароля
      */
-    public PassGen(String str, int len) {
+    public PasswordGenerator(String str, int len) {
         this.setLen(len);
         this.setPassChar(str);
         this.passGenerate();
@@ -105,8 +104,8 @@ public class PassGen {
      * Сгенерировать и получить новый пароль
      *
      * @return - сгенерированный пароль
-     * @see PassGen#getNewPass(int)
-     * @see PassGen#getNewPass(String, int)
+     * @see PasswordGenerator#getNewPass(int)
+     * @see PasswordGenerator#getNewPass(String, int)
      */
     public String getNewPass() {
         this.passGenerate();
@@ -118,8 +117,8 @@ public class PassGen {
      *
      * @param len - длина пароля
      * @return - сгенерированный пароль
-     * @see PassGen#getNewPass()
-     * @see PassGen#getNewPass(String, int)
+     * @see PasswordGenerator#getNewPass()
+     * @see PasswordGenerator#getNewPass(String, int)
      */
     public String getNewPass(int len) {
         this.setLen(len);
@@ -133,8 +132,8 @@ public class PassGen {
      * @param str - набор символов для генератора
      * @param len - длина пароля
      * @return - сгенерированный пароль
-     * @see PassGen#getNewPass()
-     * @see PassGen#getNewPass(int)
+     * @see PasswordGenerator#getNewPass()
+     * @see PasswordGenerator#getNewPass(int)
      */
     public String getNewPass(String str, int len) {
         this.setLen(len);
