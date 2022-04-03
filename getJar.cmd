@@ -1,1 +1,0 @@
-jar -cmf manifest.mf 
