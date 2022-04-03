@@ -6,11 +6,12 @@ import java.awt.datatransfer.*;
 import java.awt.event.*;
 
 public class Form extends JFrame {
-    PasswordGenerator pass = new PasswordGenerator(8);
-    public JTextArea area0 = new JTextArea(pass.getNewPass());
+    PasswordGenerator pass = new PasswordGenerator();
+    public JTextArea area0;
+    public String temlp;
 
-    public Form() {
-
+    public Form(String arg) {
+        this.temlp = arg;
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int widthSc = gd.getDisplayMode().getWidth();
         int heigthSc = gd.getDisplayMode().getHeight();
@@ -20,6 +21,7 @@ public class Form extends JFrame {
         setLayout(null);
         JButton bt0 = new JButton("Новый пароль");
         JButton bt1 = new JButton("Скопировать");
+        area0 = new JTextArea(pass.getPassFromTemplate(this.temlp));
         area0.setBounds(10, 10, 310, 40);
         area0.setEditable(false);
         area0.setFont(new Font("Courier", Font.BOLD, 24));
@@ -28,13 +30,9 @@ public class Form extends JFrame {
         add(bt0);
         add(bt1);
         add(area0);
-
-
         MyActions listener = new MyActions();
         bt0.addActionListener(listener);
         bt1.addActionListener(listener);
-
-
         setAlwaysOnTop(true);
         setResizable(false);
         setVisible(true);
@@ -44,7 +42,7 @@ public class Form extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getActionCommand() == "Новый пароль") {
-                area0.setText(pass.getNewPass());
+                area0.setText(pass.getPassFromTemplate());
             }
             if (e.getActionCommand() == "Скопировать") {
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

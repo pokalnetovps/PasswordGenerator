@@ -1,5 +1,7 @@
 package app;
 
+import java.io.Console;
+
 /**
  * Класс генератора пароля
  *
@@ -19,9 +21,17 @@ public class PasswordGenerator {
     /**
      * набор символов для генерации пароля
      */
-    //private String passChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789";
-    private String passChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz0123456789" + "!@#$%^&*()_+-=/?,.`~<>;:\"'{}[]|";
+    public static final String UPCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static final String LOWCHARS = "abcdefghijklmnopqrstuvwxyz";
+    public static final String NUMBERS = "0123456789";
+    public static final String SPECHARS = "\\!@#$%^&*()_+-=/?,.`~<>;:\"'{}[]|";
+    private String passChar = UPCHARS + LOWCHARS + NUMBERS + SPECHARS;
     private int passCharLen;
+    /**
+     * шаблон для генерации
+     */
+    private String tmplt = "########";
+
 
     /**
      * Конструктор - создание генератора с базовым набором символов и длинной 8 знаков
@@ -177,6 +187,60 @@ public class PasswordGenerator {
                 this.passString,
                 this.passLen,
                 this.passChar);
+    }
+
+    public String getPassFromTemplate() {
+        if (tmplt.length() > 0) {
+            return _getPassFromTemplate();
+        }
+        return ("");
+    }
+
+    /**
+     * генерацтя пароля по шаблону
+     *
+     * @param template - шаблон, например: SsNNNNND - выдаст пароль в виде Re18342@
+     *                 S-буква в верхнем регистре,
+     *                 s-буква в нижнем регистре,
+     *                 N-цифра,
+     *                 D-спецсимвол
+     * @return сгенерированный пароль
+     */
+
+    public String getPassFromTemplate(String template) {
+        tmplt = template;
+        return _getPassFromTemplate();
+    }
+
+    private String _getPassFromTemplate() {
+        if (tmplt.length() == 0) {
+            return this.getNewPass();
+        }
+        String password = "";
+        for (int i = 0; i < tmplt.length(); i++) {
+            char element = tmplt.charAt(i);
+            switch (element) {
+                case '\\':
+                    i++;
+                    password+=tmplt.charAt(i);
+                    break;
+                case 'S':
+                    password += getNewPass(UPCHARS, 1);
+                    break;
+                case 's':
+                    password += getNewPass(LOWCHARS, 1);
+                    break;
+                case 'N':
+                    password += getNewPass(NUMBERS, 1);
+                    break;
+                case 'D':
+                    password += getNewPass(SPECHARS, 1);
+                    break;
+                default:
+                    password += getNewPass(UPCHARS + LOWCHARS + NUMBERS + SPECHARS, 1);
+            }
+        }
+        return password;
     }
 }
     
